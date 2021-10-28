@@ -12,7 +12,8 @@ cc.Class({
         target: {
             default: null,
             type: cc.Prefab
-        }
+        },
+        parent : cc.Node,
     },
     
     onLoad: function () {
@@ -28,8 +29,12 @@ cc.Class({
 
         // Enable the video module.
         agora.enableVideo();
+        // Enable the audio.
+        agora.enableAudio();
         // Start the local video preview.
         agora.startPreview();
+
+        agora.addInjectStreamUrl("https://www.youtube.com/watch?v=EV-91JV4Fws&list=RDEV-91JV4Fws&start_radio=1&ab_channel=Masew", new LiveInjectStreamConfig( { audioBitrate:400, audioChannels:1, audioSampleRate:44100, height:0, videoBitrate:400, videoFramerate: 15, videoGop:30, width:0 }));
     },
 
 
@@ -59,7 +64,10 @@ cc.Class({
         // Replace YOUR_TOKEN with the token you generated.
         // Replace CHANNEL_NAME with the channel name that you use to generate the token.
         // Enter a user ID in uid.
-        agora.joinChannel('006f9afd5283bfd4cfb95d37661cd0d0c1fIAC/S9Z/XXcC6KxqW0ZhdZOYyrvA7gSDqp6n+adaXq0TLQx+f9gAAAAAEADJD5AXPVl6YQEAAQA9WXph', 'test', '', 1);
+        var date = new Date();
+        var id = parseInt(date.getTime()%1000);
+        cc.log("id "+id);
+        agora.joinChannel('006f9afd5283bfd4cfb95d37661cd0d0c1fIAC/S9Z/XXcC6KxqW0ZhdZOYyrvA7gSDqp6n+adaXq0TLQx+f9gAAAAAEADJD5AXPVl6YQEAAQA9WXph', 'test', '', id);
     },
 
 
@@ -80,9 +88,9 @@ cc.Class({
             // Add AgoraVideoRender component to the Scene
             cc.director.getScene().addChild(render, 0, `uid:${this.remoteUid}`);
             // Set the size of the remote video view.
-            render.setContentSize(160, 120);
+            render.setContentSize(250, 200);
             // Set the position of the remote video view.
-            render.setPosition(300, 120);
+            render.setPosition(500, 0);
         }
     },
 
@@ -110,5 +118,6 @@ cc.Class({
     },
 
     // Occur when the local user leaves the channel.
-    onLeaveChannel: function (stats) {}
+    onLeaveChannel: function (stats) {
+    }
 });

@@ -18,7 +18,7 @@ cc.Class({
     
     onLoad: function () {
         // Initialize the Agora engine. Replace YOUR_APPID with the App ID of your Agora project.
-        agora.init('f9afd5283bfd4cfb95d37661cd0d0c1f');
+        agora.init('03fb15e4d24a430497b80294d17af14f');
         agora.on('joinChannelSuccess', this.onJoinChannelSuccess, this);
         agora.on('leaveChannel', this.onLeaveChannel, this);
         agora.on('userJoined', this.onUserJoined, this);
@@ -34,7 +34,7 @@ cc.Class({
         // Start the local video preview.
         agora.startPreview();
 
-        agora.addInjectStreamUrl("https://www.youtube.com/watch?v=EV-91JV4Fws&list=RDEV-91JV4Fws&start_radio=1&ab_channel=Masew", new LiveInjectStreamConfig( { audioBitrate:400, audioChannels:1, audioSampleRate:44100, height:0, videoBitrate:400, videoFramerate: 15, videoGop:30, width:0 }));
+        //agora.addInjectStreamUrl("https://www.youtube.com/watch?v=EV-91JV4Fws&list=RDEV-91JV4Fws&start_radio=1&ab_channel=Masew", new LiveInjectStreamConfig( { audioBitrate:400, audioChannels:1, audioSampleRate:44100, height:0, videoBitrate:400, videoFramerate: 15, videoGop:30, width:0 }));
     },
 
 
@@ -67,7 +67,7 @@ cc.Class({
         var date = new Date();
         var id = parseInt(date.getTime()%1000);
         cc.log("id "+id);
-        agora.joinChannel('006f9afd5283bfd4cfb95d37661cd0d0c1fIAC/S9Z/XXcC6KxqW0ZhdZOYyrvA7gSDqp6n+adaXq0TLQx+f9gAAAAAEADJD5AXPVl6YQEAAQA9WXph', 'test', '', id);
+        agora.joinChannel('00603fb15e4d24a430497b80294d17af14fIAD3nKmmCewq2XsgyWmmdCvDTIVwmkxSsBZF5ydgw0GIIa8sD1MAAAAAEADEGoyZAcZ7YQEAAQD/xXth', 'live', '', id);
     },
 
 
@@ -86,18 +86,18 @@ cc.Class({
             // Set the uid of the AgoraVideoRender component to the uid of the remote host.
             render.getComponent(AgoraVideoRender).uid = this.remoteUid;
             // Add AgoraVideoRender component to the Scene
-            cc.director.getScene().addChild(render, 0, `uid:${this.remoteUid}`);
+            this.parent.addChild(render, 0, `uid:${this.remoteUid}`);
             // Set the size of the remote video view.
-            render.setContentSize(250, 200);
+            render.setContentSize(700, 394);
             // Set the position of the remote video view.
-            render.setPosition(500, 0);
+            render.setPosition(0, 0);
         }
     },
 
     onUserOffline: function (uid, reason) {
         if (this.remoteUid === uid) {
             // When a remote host leaves the channel, set the uid to undefined.
-            cc.director.getScene().getChildByName(`uid:${this.remoteUid}`).destroy();
+            this.parent.getChildByName(`uid:${this.remoteUid}`).destroy();
             this.remoteUid = undefined;
         }
     },
@@ -107,7 +107,7 @@ cc.Class({
         agora.leaveChannel();
         if (this.remoteUid !== undefined) {
             // Remove the remote video view.
-            cc.director.getScene().getChildByName(`uid:${this.remoteUid}`).destroy();
+            this.parent.getChildByName(`uid:${this.remoteUid}`).destroy();
             this.remoteUid = undefined;
         }
         // After the local user leaves the channel, the label of the button changes to Join a channel.

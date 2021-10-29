@@ -18,12 +18,12 @@
   "md5Cache": true,
   "nativeMd5Cache": true,
   "encryptJs": true,
-  "xxteaKey": "2c68ccd2-2c24-44",
+  "xxteaKey": "f00ee082-fc77-4b",
   "zipCompressJs": true,
   "fb-instant-games": {},
   "android": {
     "REMOTE_SERVER_ROOT": "",
-    "packageName": "org.cocos2d.demo"
+    "packageName": "com.testvideo"
   },
   "ios": {
     "REMOTE_SERVER_ROOT": "",

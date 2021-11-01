@@ -67,7 +67,7 @@ cc.Class({
         var date = new Date();
         var id = parseInt(date.getTime()%1000);
         cc.log("id "+id);
-        agora.joinChannel('00603fb15e4d24a430497b80294d17af14fIAD3nKmmCewq2XsgyWmmdCvDTIVwmkxSsBZF5ydgw0GIIa8sD1MAAAAAEADEGoyZAcZ7YQEAAQD/xXth', 'live', '', id);
+        agora.joinChannel('00603fb15e4d24a430497b80294d17af14fIABnQltBvM1IYfxcyVW5xJx7THF9pjJO0qr8yNtnYDghe68sD1MAAAAAEADJD5AXiqqAYQEAAQCJqoBh', 'live', '', id);
     },
 
 
